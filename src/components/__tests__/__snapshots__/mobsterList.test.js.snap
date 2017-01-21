@@ -1,0 +1,12 @@
+exports[`<MobsterList/> renders 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Mobsters
+      </th>
+    </tr>
+  </thead>
+  <tbody />
+</table>
+`;

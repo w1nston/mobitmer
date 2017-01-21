@@ -10,6 +10,9 @@ const developmentLoadURL = 'http://localhost:3000';
 //   slashes: true
 // });
 
+// TODO: Investigate [mitt](https://github.com/developit/mitt)
+// TODO: for communication between here and react
+
 let browserWindow;
 
 function createBrowserWindow() {
