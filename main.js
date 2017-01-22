@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -10,19 +10,19 @@ const developmentLoadURL = 'http://localhost:3000';
 //   slashes: true
 // });
 
-// TODO: Investigate [mitt](https://github.com/developit/mitt)
-// TODO: for communication between here and react
-
 let browserWindow;
 
 function createBrowserWindow() {
-  browserWindow = new BrowserWindow({ width: 800, height: 600 });
+  browserWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+  });
 
   browserWindow.loadURL(developmentLoadURL);
 
   browserWindow.webContents.openDevTools();
 
-  browserWindow.on('close', () => { browserWindow = null; })
+  browserWindow.on('close', () => { browserWindow = null; });
 }
 
 app.on('ready', createBrowserWindow);
@@ -38,3 +38,11 @@ app.on('activate', () => {
     createBrowserWindow();
   }
 });
+
+// ipcMain.on('ping', (event, msg) => {
+//   console.log('pinging from redux! msg', msg);
+//   event.sender.send('ping', 'whaaat!?');
+// });
+
+// TOOD:  I need to establish a communication channel.
+//        It needs to listen on some defined channel...

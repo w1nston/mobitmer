@@ -4850,6 +4850,10 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
+redux-electron-ipc@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/redux-electron-ipc/-/redux-electron-ipc-1.1.6.tgz#8679e2cb62d0a1b6ac57a53a05a159d90d3bc79f"
+
 redux-form@^6.4.3:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-6.4.3.tgz#bd83a77770d9805f7b595a4ff18f00fe4267d3c8"
