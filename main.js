@@ -10,7 +10,8 @@ const developmentLoadURL = 'http://localhost:3000';
 //   slashes: true
 // });
 
-let browserWindow;
+let browserWindow = null;
+let takeFocus = true;
 
 function createBrowserWindow() {
   browserWindow = new BrowserWindow({
@@ -39,10 +40,8 @@ app.on('activate', () => {
   }
 });
 
-// ipcMain.on('ping', (event, msg) => {
-//   console.log('pinging from redux! msg', msg);
-//   event.sender.send('ping', 'whaaat!?');
-// });
-
-// TOOD:  I need to establish a communication channel.
-//        It needs to listen on some defined channel...
+ipcMain.on('channelName', (event, msg) => {
+  console.log('channelName received from redux!', msg);
+  // TODO: This is how I communicate...
+  event.sender.send('channelName', 'responding with pong oing from Main process!');
+});

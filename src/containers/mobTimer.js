@@ -3,7 +3,7 @@ import MobTimer from '../components/mobTimer';
 
 const mapDispatchToProps = dispatch => ({
   onStart() {
-    // TODO
+    // TODO: Start timer
   }
 });
 
