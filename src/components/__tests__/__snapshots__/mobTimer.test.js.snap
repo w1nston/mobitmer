@@ -1,7 +1,0 @@
-exports[`<MobTimer/> renders 1`] = `
-<section>
-  <button>
-    Start
-  </button>
-</section>
-`;
