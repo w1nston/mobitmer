@@ -1,11 +1,12 @@
 import { addMobsterName, types } from '../mobsterFormActions';
 
 describe('addMobsterName', () => {
-  test('returns object with correct type', () => {
+  it('returns object with correct type', () => {
+    expect(addMobsterName().type).toBe(types.ADD_MOBSTER_NAME);
+  });
+
+  it('returns object containing provided name', () => {
     const name = 'name';
-    expect(addMobsterName(name)).toEqual({
-      type: types.ADD_MOBSTER_NAME,
-      name,
-    });
+    expect(addMobsterName(name).name).toBe(name);
   });
 });
