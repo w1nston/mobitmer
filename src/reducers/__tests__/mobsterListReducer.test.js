@@ -20,7 +20,7 @@ describe('mobsterListReducer', () => {
 });
 
 describe('getListOfMobsters', () => {
-  test('returns the list of mobsters from state', () => {
+  it('returns the list of mobsters from state', () => {
     const state = {
       mobsterListReducer: immutableList(),
     };
