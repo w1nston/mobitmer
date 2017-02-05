@@ -1,27 +1,46 @@
 import React from 'react';
+import moment from 'moment';
 import shallowWithStore from '../../utils/reduxTestUtils';
 import MobTimerContainer from '../mobTimer';
 import MobTimer from '../../components/mobTimer';
+import * as timerReducer from '../../reducers/timerReducer';
+import { types, timeUnits } from '../../actions/timerActions';
 
 describe('MobTimer container', () => {
-  test('connects a <MobTimer /> component', () => {
+  it('connects a <MobTimer /> component', () => {
+    spyOn(timerReducer, 'getEndTime');
     const container = shallowWithStore(<MobTimerContainer />);
     expect(container.type()).toBe(MobTimer);
   });
 
-  test('maps onStart from dispatch to props', () => {
-    const dispatch = jest.fn();
+  it('maps endTime from state to props', () => {
+    const endTime = 'end time';
+    spyOn(timerReducer, 'getEndTime').and.returnValue(endTime);
     const container = shallowWithStore(<MobTimerContainer />);
-    expect(typeof container.prop('onStart')).toBe('function');
+    expect(container.prop('endTime')).toBe(endTime);
   });
 
-  test('onStart emitts on start event', () => {
-    // TODO
-    // on click on the start button
-    // emit an event that is picked up by
-    // electron app, that toggles resize window
-    // BUT -> IT SHOULD BE DONE BY DISPATCHING AN ACTION
-    // do not want to couple electron specific code inside
-    // redux specific client code...
+  it('maps prop onStart with dispatch of action type START_TIMER', () => {
+    const state = {};
+    const endTime = moment().add(timeUnits.TEN_MINUTES).unix();
+    spyOn(timerReducer, 'getEndTime');
+    const dispatch = jest.fn();
+    const container = shallowWithStore(<MobTimerContainer />, state, dispatch);
+    container.prop('onStart')();
+    expect(dispatch).toHaveBeenCalledWith({
+      type: types.START_TIMER,
+      endTime,
+    });
+  });
+
+  it('maps prop onStop with dispatch of action type STOP_TIMER', () => {
+    const state = {};
+    spyOn(timerReducer, 'getEndTime');
+    const dispatch = jest.fn();
+    const container = shallowWithStore(<MobTimerContainer />, state, dispatch);
+    container.prop('onStop')();
+    expect(dispatch).toHaveBeenCalledWith({
+      type: types.STOP_TIMER,
+    });
   });
 });

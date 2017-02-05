@@ -18,6 +18,7 @@ export const startTimer = endTime => ({
   endTime,
 });
 
-export const stopTimer = () => ({
+export const stopTimer = timeOffset => ({
   type: types.STOP_TIMER,
+  timeOffset,
 });

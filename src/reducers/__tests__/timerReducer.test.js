@@ -3,14 +3,16 @@ import {
 } from 'immutable';
 import timerReducer, {
   getEndTime,
+  getTimeOffset,
 } from '../timerReducer';
-import { types } from '../../actions/timerActions';
+import { types, timeUnits } from '../../actions/timerActions';
 
 describe('timerReducer', () => {
   describe('when state is undefined', () => {
     it('returns initial state', () => {
       expect(timerReducer()).toEqual(immutableMap({
         endTime: null,
+        timeOffset: timeUnits.TEN_MINUTES,
       }));
     });
   });
@@ -32,14 +34,20 @@ describe('timerReducer', () => {
 
   describe('when action type is STOP_TIMER', () => {
     // TODO: I want to add remainder somehow rather than resetting on stop
-    it('returns new state with end time set to null', () => {
+    it('returns correct new state', () => {
+      const timeOffset = 'expected time offset';
       const state = immutableMap({
         endTime: 'existing end time',
+        timeOffset: 'time offset',
       });
-      expect(timerReducer(state, {
-        type: types.STOP_TIMER,
-      })).toEqual(immutableMap({
+      expect(
+        timerReducer(state, {
+          type: types.STOP_TIMER,
+          timeOffset,
+        })
+      ).toEqual(immutableMap({
         endTime: null,
+        timeOffset,
       }));
     });
   });
@@ -54,5 +62,17 @@ describe('getEndTime', () => {
       }),
     };
     expect(getEndTime(state)).toBe(endTime);
+  });
+});
+
+describe('getTimeOffset', () => {
+  it('returns the time offset from state', () => {
+    const timeOffset = 'time offset';
+    const state = {
+      timerReducer: immutableMap({
+        timeOffset,
+      }),
+    };
+    expect(getTimeOffset(state)).toBe(timeOffset);
   });
 });

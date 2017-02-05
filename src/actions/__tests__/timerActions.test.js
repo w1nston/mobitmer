@@ -19,4 +19,9 @@ describe('stopTimer', () => {
   it('returns object with correct type', () => {
     expect(stopTimer().type).toBe(types.STOP_TIMER);
   });
+
+  it('returns object with provided time offset', () => {
+    const timeOffset = 'time offset';
+    expect(stopTimer(timeOffset).timeOffset).toBe(timeOffset);
+  });
 });
